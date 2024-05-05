@@ -30,10 +30,6 @@ function handleChange(event) {
                 element.style.display = 'none';
             }
         });
-        removeListeners();
-        addListeners();
-        removeQuestionListeners();
-        addQuestionsListeners();
     });
 }
 
@@ -72,8 +68,6 @@ function handleQuestionChange(event) {
                 element.style.display = 'none';
             }
         });
-        removeQuestionListeners();
-        addQuestionsListeners();
     });
 }
 }
@@ -104,31 +98,6 @@ function addQuestionsListeners() {
     });
 }
 
-
-function removeListeners() {
-    const forms = document.querySelectorAll('.quiz-form');
-
-    forms.forEach(form => {
-        const checkboxes = form.querySelectorAll('input[type="checkbox"], input[type="radio"]');
-        
-        checkboxes.forEach(checkbox => {
-        checkbox.removeEventListener('change', handleChange);
-        });
-    });
-}
-
-
-function removeQuestionListeners() {
-    const forms = document.querySelectorAll('.question-form');
-
-    forms.forEach(form => {
-        const textInputs = form.querySelectorAll('input[type="text"]');
-        
-        textInputs.forEach(input => {
-        input.removeEventListener('blur', handleQuestionChange);
-        });
-    });
-}
 
 
 document.addEventListener('keydown', function(event) {
