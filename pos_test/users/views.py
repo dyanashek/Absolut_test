@@ -7,7 +7,6 @@ from .models import CustomUser
 
 
 def login_or_signup(request):
-    print(request.GET)
     if request.method == 'GET':
         title = 'ERP | Absolut - система автоматизации'
         form = CustomUserForm
@@ -19,7 +18,6 @@ def login_or_signup(request):
         return render(request, template, context)
 
     elif request.method == 'POST':
-        print(3)
         if email := request.POST.get('email'):
             user = CustomUser.objects.get_or_create(email=email)[0]
 
