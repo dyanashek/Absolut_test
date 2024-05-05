@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.views.generic import RedirectView
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/auth/login/')),
@@ -25,3 +26,7 @@ urlpatterns = [
     path('auth/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+
+
