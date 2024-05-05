@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load user_filters %}
+{% block js %}
+  <script src="{% static 'js/listeners.js'%}"></script>
+{% endblock %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block information %}
+  <div class="row justify-content-center">
+    <div class="col-md-7 p-2">
+      <div class="card">
+        <div class="card-header">
+          {{ email }}
+        </div>
+        <div class="card-body">
+          {% for form in forms %}
+            {% if form.name in visible %}
+              <div id="{{ form.name }}" style="display: block;">
+            {% else %}
+              <div id="{{ form.name }}" style="display: none;">
+            {% endif %}
+              {% if form.type == 'question' %}
+                <form id="{{ form.id }}" class="question-form">
+              {% else %}
+                <form id="{{ form.id }}" class="quiz-form">
+              {% endif %}
+                {% csrf_token %}
+                  {% for field in form %}
+                    {% if field.label %}
+                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% endif %}
+                    {% if form.type == 'question' %}
+                      {{ field|addclass:'form-control' }}
+                    {% else %}
+                      {{ field }}
+                    {% endif %}
+                  {% endfor %}
+               </form>
+              {% if not forloop.last %}
+                <hr>
+              {% endif %}
+              </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
