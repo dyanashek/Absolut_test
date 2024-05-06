@@ -29,7 +29,7 @@
                 {% csrf_token %}
                   {% for field in form %}
                     {% if field.label %}
-                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                      <label for="{{ form.name }}">{{ field.label }}</label><br>
                     {% endif %}
                     {% if form.type == 'question' %}
                       {{ field|addclass:'form-control' }}

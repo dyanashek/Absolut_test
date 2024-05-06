@@ -55,26 +55,32 @@ class MultipleChoiceForm(QuizBaseForm):
     def __init__(self, *args, **kwargs):
         super(MultipleChoiceForm, self).__init__(*args, **kwargs)
 
-        self.fields['choices'] = forms.MultipleChoiceField(
+        choices_field = forms.MultipleChoiceField(
             required=False, 
             label=self.quiz.label, 
             choices=self._get_choices(), 
             widget=forms.widgets.CheckboxSelectMultiple,
             initial=self._get_initial(),
             )
+        choices_field.widget.attrs.update({'id': f"quiz_{self.quiz.pk}"})
+        self.fields['choices'] = choices_field
+
 
 
 class ChoiceForm(QuizBaseForm):
     def __init__(self, *args, **kwargs):
         super(ChoiceForm, self).__init__(*args, **kwargs)
 
-        self.fields['choices'] = forms.ChoiceField(
+        choices_field = forms.ChoiceField(
             required=False, 
             label=self.quiz.label, 
             choices=self._get_choices(), 
             widget=forms.widgets.RadioSelect,
             initial=self._get_initial(),
             )
+        
+        choices_field.widget.attrs.update({'id': f"quiz_{self.quiz.pk}"})
+        self.fields['choices'] = choices_field
 
 
 class QuestionBaseForm(forms.Form):

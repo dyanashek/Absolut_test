@@ -1,5 +1,4 @@
 function handleChange(event) {
-    console.log('Привет, мир!');
     const checkbox = event.target;
     const form = checkbox.closest('.quiz-form');
     const formData = new FormData(form);
